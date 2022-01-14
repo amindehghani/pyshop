@@ -2,4 +2,4 @@ from flask import Flask
 
 app = Flask(__name__)
 
-from web import client
+from web import client, admin
