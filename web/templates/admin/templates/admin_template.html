@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dist.css') }}">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <main>
-        {% block main %}{% endblock %}
-    </main>
+<main>
+    {% block main %}{% endblock %}
+</main>
 
 </body>
 </html>

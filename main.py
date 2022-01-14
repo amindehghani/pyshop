@@ -1,6 +1,7 @@
 import coloredlogs
 import database
 import logging
+import secrets
 
 from web import app
 
@@ -15,6 +16,7 @@ def main():
     db, cursor = db_helper.connect_db()
     app.config['db_cursor'] = cursor
     app.config['db'] = db
+    app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
     app.run()
 
 
