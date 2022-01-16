@@ -13,8 +13,7 @@ def main():
     _logger.info("Starting Service...")
     _logger.info("Connecting to Database...")
     db_helper = database.Database()
-    db, cursor = db_helper.connect_db()
-    app.config['db_cursor'] = cursor
+    db = db_helper.connect_db()
     app.config['db'] = db
     app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
     app.run()
