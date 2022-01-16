@@ -39,9 +39,17 @@ def login():
     return render_template('login.html', values=values)
 
 
-@app.route('/dashboard')
+@app.route('/admin/dashboard')
 def dashboard():
     if not session.get('uid') is None:
-        return 'hello from dashboard'
+        return render_template('admin/dashboard.html')
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/admin/products')
+def products():
+    if not session.get('uid') is None:
+        return render_template('admin/products.html')
     else:
         return redirect(url_for('login'))
