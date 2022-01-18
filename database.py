@@ -11,12 +11,19 @@ coloredlogs.install(level='DEBUG', logger=_logger, fmt="%(levelname)s -> %(messa
 class Database:
     db_auth = False
     TABLES = {
+        "Image": {
+            "id": "INT(10) NOT NULL AUTO_INCREMENT",
+            "name": "VARCHAR(255)",
+            "PRIMARY KEY": "(id)"
+        },
         "Product": {
             "id": "INT(10) NOT NULL AUTO_INCREMENT",
             "name": "VARCHAR(120)",
             "price": "DOUBLE",
             "description": "LONGTEXT",
-            "PRIMARY KEY": "(id)"
+            "image_id": "INT(10)",
+            "PRIMARY KEY": "(id)",
+            "FOREIGN KEY": "(image_id) REFERENCES Image(id) ON UPDATE CASCADE ON DELETE RESTRICT"
         },
         "User": {
             "id": "INT(10) NOT NULL AUTO_INCREMENT",

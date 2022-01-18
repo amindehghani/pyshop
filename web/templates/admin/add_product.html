@@ -3,60 +3,74 @@
 {% block page_title %} <h1 class="text-3xl font-bold text-gray-900">Create a new product</h1>{% endblock %}
 
 {% block main %}
-<div>
-  <div class="md:grid md:grid-cols-3 md:gap-6">
-    <div class="md:col-span-1">
-      <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Product</h3>
-        <p class="mt-1 text-sm text-gray-600">
-            To define a Product please enter the information requested
-        </p>
-      </div>
-    </div>
-    <div class="mt-5 md:mt-0 md:col-span-2">
-      <form method="POST">
-        <div class="shadow sm:rounded-md sm:overflow-hidden">
-          <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div class="grid grid-cols-3 gap-6">
-              <div class="col-span-3 sm:col-span-2">
-                <label for="name" class="block text-sm font-medium text-gray-700">
-                  Product name
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="text" name="name" id="name" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+    <div>
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+                <div class="px-4 sm:px-0">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Product</h3>
+                    <p class="mt-1 text-sm text-gray-600">
+                        To define a Product please enter the information requested
+                    </p>
                 </div>
-              </div>
             </div>
-              <div class="grid grid-cols-3 gap-6">
-              <div class="col-span-3 sm:col-span-2">
-                <label for="price" class="block text-sm font-medium text-gray-700">
-                  Price
-                </label>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                  <input type="number" name="price" id="price" required class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
-                </div>
-              </div>
-            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="shadow sm:rounded-md sm:overflow-hidden">
+                        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label for="name" class="block text-sm font-medium text-gray-700">
+                                        Product name
+                                    </label>
+                                    <div class="mt-1 flex rounded-md shadow-sm">
+                                        <input type="text" name="name" id="name" required
+                                               class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-3 sm:col-span-2">
+                                    <label for="price" class="block text-sm font-medium text-gray-700">
+                                        Price
+                                    </label>
+                                    <div class="mt-1 flex rounded-md shadow-sm">
+                                        <input type="number" name="price" id="price" required
+                                               class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                    </div>
+                                </div>
+                            </div>
 
-            <div>
-              <label for="description" class="block text-sm font-medium text-gray-700">
-                Description
-              </label>
-              <div class="mt-1">
-                <textarea id="description" name="description" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
-              </div>
-            </div>
+                            <div>
+                                <label for="description" class="block text-sm font-medium text-gray-700">
+                                    Description
+                                </label>
+                                <div class="mt-1">
+                                    <textarea id="description" name="description" rows="3"
+                                              class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                </div>
+                            </div>
+                            <div class="flex w-full items-center justify-start bg-grey-lighter">
+                                <label class="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-indigo-700 hover:text-white">
+                                    <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20">
+                                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                                    </svg>
+                                    <span class="mt-2 text-base leading-normal">Select a file</span>
+                                    <input type='file' name="product_image" class="hidden"/>
+                                </label>
+                            </div>
 
-          </div>
-          <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Save
-            </button>
-          </div>
+                        </div>
+                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                            <button type="submit"
+                                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </form>
     </div>
-  </div>
-</div>
 
 {% endblock %}

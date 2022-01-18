@@ -2,6 +2,7 @@ import coloredlogs
 import database
 import logging
 import secrets
+import pathlib
 
 from web import app
 
@@ -16,6 +17,8 @@ def main():
     db = db_helper.connect_db()
     app.config['db'] = db
     app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
+    current_path = pathlib.Path(__file__).parent.resolve()
+    app.config['UPLOAD_PATH'] = str(current_path) + '/web/uploads'
     app.run()
 
 

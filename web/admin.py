@@ -1,7 +1,11 @@
 import bcrypt
+import string
+import random
+import os
 
 from web import app
 from flask import render_template, session, redirect, url_for, request
+from werkzeug.utils import secure_filename
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -68,16 +72,32 @@ def add_product():
     if request.method == 'POST':
         missing = []
         form_data = request.form
+        image = request.files['product_image']
         if not form_data.get('name') or form_data.get('name') == '':
             missing.append('Product Name')
         if not form_data.get('price') or form_data.get('price') == '':
             missing.append('Product Price')
         if not form_data.get('description') or form_data.get('description') == '':
             missing.append('Product Description')
+        if not image:
+            missing.append('Product Image')
         if not missing:
             try:
+                file_mime = secure_filename(image.filename.split('.')[1])
+                mimetype = image.mimetype
+                file_new_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(15)) + '.'+file_mime
+                image.save(os.path.join(app.config['UPLOAD_PATH'], file_new_name))
                 cursor = app.config['db'].cursor()
-                query = "INSERT INTO Product (name, price, description) VALUES (\"%s\", %s, \"%s\")" % (form_data.get('name'), form_data.get('price'), form_data.get('description'))
+                query = "INSERT INTO Image(name) VALUES (\"%s\")" % (file_new_name)
+                cursor.execute(query)
+                cursor.close()
+                app.config['db'].commit()
+                cursor = app.config['db'].cursor()
+                cursor.execute("SELECT LAST_INSERT_ID();")
+                image_id = cursor.fetchone()
+                cursor.close()
+                cursor = app.config['db'].cursor()
+                query = "INSERT INTO Product (name, price, description, image_id) VALUES (\"%s\", %s, \"%s\", %s)" % (form_data.get('name'), form_data.get('price'), form_data.get('description'), image_id[0])
                 cursor.execute(query)
                 app.config['db'].commit()
                 return redirect(url_for('products'))
