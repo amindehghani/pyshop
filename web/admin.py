@@ -84,7 +84,6 @@ def add_product():
         if not missing:
             try:
                 file_mime = secure_filename(image.filename.split('.')[1])
-                mimetype = image.mimetype
                 file_new_name = ''.join(random.choice(string.ascii_uppercase) for _ in range(15)) + '.'+file_mime
                 image.save(os.path.join(app.config['UPLOAD_PATH'], file_new_name))
                 cursor = app.config['db'].cursor()
